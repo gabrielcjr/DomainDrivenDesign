@@ -12,6 +12,22 @@ export default class Address { //Value Object
 
     this.validate();
   }
+
+  get street(): string{
+    return this._street;
+  }
+
+  get number(): number {
+    return this._number
+  }
+
+  get zipcode(): string {
+    return this._zip
+  }
+
+  get city(): string {
+    return this._city
+  }
   validate(){
     if(this._zip.length === 0){
       throw new Error("Zip is Required")
@@ -26,8 +42,4 @@ export default class Address { //Value Object
       throw new Error("City is required")
     }
   }
-
-
-
-
 }
