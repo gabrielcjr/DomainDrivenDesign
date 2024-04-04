@@ -3,7 +3,7 @@ import Address from "./address";
 export default class Customer{
   private _id: string;
   private _name: string = "";
-  private _address!: Address
+  private _address!: Address;
   private _active: boolean = false;
   private _rewardPoints: number = 0;
 
@@ -29,6 +29,10 @@ export default class Customer{
     return this._active;
   }
 
+  get address(): Address{
+    return this._address
+  }
+
   validate(){
     if (this._name.length ===0){
       throw new Error("Name is Required")
@@ -41,6 +45,10 @@ export default class Customer{
   changeName(name: string){
     this._name = name;
     this.validate();
+  }
+
+  changeAddress(address: Address){
+    this._address = address;
   }
 
   activate(){
