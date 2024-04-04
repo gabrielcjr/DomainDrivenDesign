@@ -22,7 +22,7 @@ describe("order repository unit tests", () => {
       logging: false,
       sync: { force: true },
     });
-    sequelize.addModels([OrderModel, CustomerModel, OrderItemModel, ProductModel])
+    sequelize.addModels([CustomerModel, OrderModel, OrderItemModel, ProductModel])
     await sequelize.sync();      
   });
   
@@ -50,11 +50,14 @@ describe("order repository unit tests", () => {
       2
     );
 
-    const orderRepository = new OrderRepository();
     const order = new Order("123", "123", [orderItem]);
-    orderRepository.create(order)
+    const orderRepository = new OrderRepository();
+    await orderRepository.create(order)
 
-    const orderModel = await OrderModel.findOne({ where: { id: order.id}, include: ["items"]});
+    const orderModel = await OrderModel.findOne({ 
+      where: { id: order.id}, 
+      include: ["items"]
+    });
 
     expect(orderModel.toJSON()).toStrictEqual({
       id: "123",
@@ -66,7 +69,8 @@ describe("order repository unit tests", () => {
           name: orderItem.name,
           price: orderItem.price,
           quantity: orderItem.quantity,
-          order_id: "123"
+          order_id: "123",
+          product_id: "123"
         }
       ]
     })
