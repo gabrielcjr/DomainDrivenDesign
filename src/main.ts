@@ -12,4 +12,4 @@ customer.setAddress(address);
 
 // const order = new Order("1", "123", [item1, item2])
 
-// console.log(order)
+// console.log(order) a
