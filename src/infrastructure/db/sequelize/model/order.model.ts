@@ -19,7 +19,8 @@ export default class OrderModel extends Model {
   declare customer: CustomerModel;
 
   @HasMany(() => OrderItemModel)
-  declare items: OrderItemModel[]
+  declare items: Awaited<Promise<OrderItemModel[]>>;
+  // declare items: Awaited;
 
   @Column({ allowNull: false })
   declare total: number
